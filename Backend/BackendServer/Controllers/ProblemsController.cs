@@ -21,7 +21,6 @@ public class ProblemsController(IProblemRepository problemRepository, IProblemFa
     [HttpPost]
     public async Task<ActionResult<ProblemDTO>> PostProblem([FromBody] NewProblem newProblem)
     {
-        if (!ModelState.IsValid) return BadRequest();
         return Ok(problemRepository.CreateProblem(newProblem));
     }
 

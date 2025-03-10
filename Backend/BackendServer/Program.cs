@@ -32,7 +32,7 @@ using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
 
 var context = services.GetRequiredService<ApiDbContext>();
-if (context.Database.IsRelational()) context.Database.Migrate();
+//if (context.Database.IsRelational()) context.Database.Migrate();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
