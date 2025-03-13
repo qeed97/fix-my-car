@@ -1,8 +1,12 @@
 using BackendServer.Data;
+using BackendServer.Models.UserModels;
 using BackendServer.Services.ProblemServices.Factory;
 using BackendServer.Services.ProblemServices.Repository;
+using BackendServer.Services.UserServices.Factory;
+using BackendServer.Services.UserServices.Repository;
 using Microsoft.EntityFrameworkCore;
 using DotNetEnv;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,7 +27,22 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddDbContext<ApiDbContext>(options => { options.UseMySQL(GetConnString()); });
 
+builder.Services.AddIdentityCore<User>(options =>
+    {
+        options.SignIn.RequireConfirmedAccount = false;
+        options.User.RequireUniqueEmail = true;
+        options.Password.RequireDigit = false;
+        options.Password.RequiredLength = 6;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireUppercase = false;
+        options.Password.RequireLowercase = false;
+    })
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<ApiDbContext>();
+
+builder.Services.AddSingleton<IUserFactory, UserFactory>();
 builder.Services.AddSingleton<IProblemFactory, ProblemFactory>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IProblemRepository, ProblemRepository>();
 
 var app = builder.Build();
