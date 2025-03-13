@@ -9,7 +9,7 @@ public class UserFactory : IUserFactory
     {
         return new User
         {
-            Username = newUser.Username,
+            UserName = newUser.Username,
             Karma = 0,
             Email = newUser.Email,
         };
