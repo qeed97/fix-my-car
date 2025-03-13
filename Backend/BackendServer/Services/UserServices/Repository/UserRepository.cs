@@ -1,11 +1,12 @@
 ﻿using BackendServer.Data;
 using BackendServer.Models.UserModels;
+using BackendServer.Services.AuthenticationServices.TokenService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace BackendServer.Services.UserServices.Repository;
 
-public class UserRepository(UserManager<User> userManager, ApiDbContext context/*, ITokenService tokenService*/) : IUserRepository
+public class UserRepository(UserManager<User> userManager, ApiDbContext context, ITokenService tokenService) : IUserRepository
 {
     public async Task CreateUser(User user, string password, string role)
     {
@@ -27,8 +28,8 @@ public class UserRepository(UserManager<User> userManager, ApiDbContext context/
         var isPasswordCorrect = await userManager.CheckPasswordAsync(managedUser, password);
         if (!isPasswordCorrect) throw new Exception("Invalid credentials");
         var roles = await userManager.GetRolesAsync(managedUser);
-        //var token = tokenService.CreateToken(managedUser, roles[0]);
-        //managedUser.SessionToken = token;
+        var token = tokenService.CreateToken(managedUser, roles[0]);
+        managedUser.SessionToken = token;
         await userManager.UpdateAsync(managedUser);
         return token;
     }
