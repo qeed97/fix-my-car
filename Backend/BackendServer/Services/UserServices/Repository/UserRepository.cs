@@ -3,6 +3,7 @@ using BackendServer.Models.UserModels;
 using BackendServer.Services.AuthenticationServices.TokenService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace BackendServer.Services.UserServices.Repository;
 
@@ -52,7 +53,7 @@ public class UserRepository(UserManager<User> userManager, ApiDbContext context,
     {
         return await context.Users
             .Include(u => u.Problems)
-            //.Include(u => u.Fixes)
+            .Include(u => u.Fixes)
             .FirstOrDefaultAsync(u => u.Id == id);
     }
 
@@ -66,7 +67,14 @@ public class UserRepository(UserManager<User> userManager, ApiDbContext context,
     {
         return await context.Users
             .Include(u => u.Problems)
-            //.Include(u => u.Fixes)
+            .Include(u => u.Fixes)
+            .FirstOrDefaultAsync(u => u.UserName == username);
+    }
+
+    public async ValueTask<User?> GetUserOnlyFixes(string username)
+    {
+        return await context.Users
+            .Include(u => u.Fixes)
             .FirstOrDefaultAsync(u => u.UserName == username);
     }
 

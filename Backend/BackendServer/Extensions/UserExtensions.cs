@@ -10,6 +10,7 @@ public static class UserExtensions
         return new UserDTO
         {
             Username = user.UserName,SessionToken = user.SessionToken,
+            Fixes = user.Fixes.Select(fix => fix.ToDTO()).ToList(),
             Problems = user.Problems.Select(problem => problem.ToDTO()).ToList(),
             karma = user.Karma,
         };
@@ -21,6 +22,7 @@ public static class UserExtensions
         {
             Username = user.UserName,
             Karma = user.Karma,
+            Fixes = user.Fixes.Select(fix => fix.ToDTO()).ToList(),
             Problems = user.Problems.Select(problem => problem.ToDTO()).ToList()
         };
     }

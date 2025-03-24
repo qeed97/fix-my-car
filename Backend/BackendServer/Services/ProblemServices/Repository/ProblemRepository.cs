@@ -9,10 +9,15 @@ namespace BackendServer.Services.ProblemServices.Repository;
 
 public class ProblemRepository(ApiDbContext context) : IProblemRepository
 {
+    public async Task<bool> CheckIfProblemExists(Guid id)
+    {
+        return await context.Problems.FirstOrDefaultAsync(p => p.Id == id) != null;
+    }
     public Task<Problem?> GetProblemById(Guid id)
     {
         return context.Problems
             .Include(p => p.User)
+            .Include(p => p.Fixes)
             .FirstOrDefaultAsync(p => p.Id == id);
     }
 
@@ -24,6 +29,7 @@ public class ProblemRepository(ApiDbContext context) : IProblemRepository
             Description = newProblem.Description,
             User = user,
             UserId = user.Id,
+            Fixes = [],
             Id = Guid.NewGuid(),
         };
         user.Problems.Add(problem);
@@ -56,7 +62,7 @@ public class ProblemRepository(ApiDbContext context) : IProblemRepository
     public IEnumerable<ProblemDTO> GetTenProblems(int startindex)
     {
         return context.Problems
-            //.Include(p => p.Fixes)
+            .Include(p => p.Fixes)
             .Include(p => p.User)
             .Skip(startindex).Take(startindex + 10).Select(p => p.ToDTO());
     }

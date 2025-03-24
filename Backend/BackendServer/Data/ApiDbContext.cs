@@ -1,3 +1,4 @@
+using BackendServer.Models.FixModel;
 using BackendServer.Models.ProblemModels;
 using BackendServer.Models.UserModels;
 using Microsoft.AspNetCore.Identity;
@@ -11,6 +12,7 @@ public class ApiDbContext(DbContextOptions<ApiDbContext> options)
 {
     public DbSet<Problem> Problems { get; set; }
     public DbSet<User> Users { get; set; }
+    public DbSet<Fix> Fixes { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
