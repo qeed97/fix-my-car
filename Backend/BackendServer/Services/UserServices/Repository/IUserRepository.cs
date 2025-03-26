@@ -30,7 +30,7 @@ public interface IUserRepository
     
     public ValueTask<User?> GetUserOnlyProblems(string username);
     
-    //public ValueTask<User?> GetUserOnlyFix(string username);
+    public ValueTask<User?> GetUserOnlyFixes(string username);
     
     //public Task UpdateUser(User user, string? password);
 }

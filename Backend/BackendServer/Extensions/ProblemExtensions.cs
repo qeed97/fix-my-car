@@ -12,6 +12,8 @@ public static class ProblemExtensions
             Id = problem.Id,
             Title = problem.Title,
             Description = problem.Description,
+            IsFixed = problem.IsFixed(),
+            Username = problem.User.UserName
             //PostedAt = problem.PostedAt,
         };
     }

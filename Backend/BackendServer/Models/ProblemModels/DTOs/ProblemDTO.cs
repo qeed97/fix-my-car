@@ -9,5 +9,6 @@ public class ProblemDTO
     public string Title { get; set; }
     public string Description { get; set; }
     public string Username { get; set; }
+    public bool IsFixed  { get; set; }
     //public DateTime PostedAt { get; set; }
 }

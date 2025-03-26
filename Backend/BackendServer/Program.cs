@@ -3,6 +3,8 @@ using BackendServer.Data;
 using BackendServer.Models.UserModels;
 using BackendServer.Services.AuthenticationServices.AuthenticationSeeder;
 using BackendServer.Services.AuthenticationServices.TokenService;
+using BackendServer.Services.FixServices.Factory;
+using BackendServer.Services.FixServices.Repository;
 using BackendServer.Services.ProblemServices.Factory;
 using BackendServer.Services.ProblemServices.Repository;
 using BackendServer.Services.UserServices.Factory;
@@ -66,9 +68,11 @@ builder.Services.AddIdentityCore<User>(options =>
 
 builder.Services.AddSingleton<IUserFactory, UserFactory>();
 builder.Services.AddSingleton<IProblemFactory, ProblemFactory>();
+builder.Services.AddSingleton<IFixFactory, FixFactory>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IProblemRepository, ProblemRepository>();
+builder.Services.AddScoped<IFixRepository, FixRepository>();
 builder.Services.AddScoped<AuthenticationSeeder>();
 
 AddJwt();
