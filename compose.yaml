@@ -34,7 +34,17 @@
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__MySql=Server=db;Database=${DB_NAME};User=${DB_USERNAME};Password=${DB_USER_PASSWORD};Port=${DB_PORT};
-      
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    networks:
+      - my-network
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://backend-server:8080
 
 
 networks:
