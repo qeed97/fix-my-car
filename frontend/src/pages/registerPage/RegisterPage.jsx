@@ -2,7 +2,7 @@
 import car from '../../assets/CAR.png'
 import lift from '../../assets/LIFT.png'
 import {useEffect, useState} from 'react'
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useCookies} from "react-cookie";
 import {toast} from 'react-hot-toast';
 
@@ -134,6 +134,15 @@ export default function RegisterPage({setUserLoginCookies}) {
                 >
                     Register
                 </button>
+                <div className='mt-2'>
+                      <span className='text-sm tracking-wider'>
+                        {' '}
+                          Already have an account?{' '}
+                      </span>
+                    <Link to='/login' className='font-medium text-blue-700'>
+                        Login!
+                    </Link>
+                </div>
             </form>
             </div>
         </div>
