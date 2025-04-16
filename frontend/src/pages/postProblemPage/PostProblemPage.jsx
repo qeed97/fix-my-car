@@ -50,13 +50,13 @@ export default function PostProblemPage() {
     }
 
     return (
-        <div className="relative flex justify-center items-start min-h-screen bg-gradient-to-br from-blue-800 via-purple-700 to-pink-600 text-yellow-100 font-mono p-10 overflow-hidden">
+        <div className="relative flex justify-center items-start min-h-screen bg-gradient-to-br from-blue-800 via-purple-700 to-pink-600 text-yellow-100 font-mono p-[2vh] ">
             <div className="flex flex-col justify-center items-center">
-                <h1 className="text-4xl underline font-bold mb-10 text-center drop-shadow-[2px_2px_0_rgba(0,0,0,0.6)]">
+                <h1 className="text-4xl underline font-bold mb-[2vh] text-center drop-shadow-[2px_2px_0_rgba(0,0,0,0.6)]">
                     Post a Problem
                 </h1>
-                <form className="relative w-240 h-140 bg-[#000000aa] backdrop-blur-md border-4 border-yellow-300 p-5 rounded-md shadow-[0_0_20px_5px_rgba(255,255,0,0.8)]">
-                    <div className="flex flex-col gap-3 pb-3">
+                <form className="relative w-[95vw] h-[76vh] bg-[#000000aa] backdrop-blur-md border-4 border-yellow-300 p-[2vh] rounded-md shadow-[0_0_20px_5px_rgba(255,255,0,0.8)]">
+                    <div className="flex flex-col gap-[1vh] pb-[1vh]">
                         <label className="text-xl tracking-wider">
                             Title
                         </label>
@@ -66,11 +66,11 @@ export default function PostProblemPage() {
                             }}
                             required
                             placeholder="Enter title"
-                            className="bg-black text-lime-300 border border-lime-400 p-1"
+                            className="bg-black text-lime-300 border border-lime-400 p-[1vh] h-[8vh]"
                         >
                         </textarea>
                     </div>
-                    <div className="flex flex-col gap-3 pb-3">
+                    <div className="flex flex-col gap-[1vh] pb-[1vh]">
                         <label className="text-xl tracking-wider">
                             Description
                         </label>
@@ -80,14 +80,14 @@ export default function PostProblemPage() {
                         }}
                         required
                         placeholder="Enter description"
-                        className="bg-black text-lime-300 border border-lime-400 p-1 h-70"
+                        className="bg-black text-lime-300 border border-lime-400 p-[1vh] h-[42vh]"
                         >
                         </textarea>
                     </div>
                     <button
                     disabled={!submittable}
                     onClick={handleSubmit}
-                    className="w-full mt-4 bg-yellow-400 text-black font-extrabold py-2 rounded hover:bg-yellow-200 shadow-md border border-black"
+                    className="w-full mt-[2vh] bg-yellow-400 text-black font-extrabold py-[1vh] rounded hover:bg-yellow-200 shadow-md border border-black"
                     >
                         Submit
                     </button>
