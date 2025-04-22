@@ -69,34 +69,33 @@ export default function RegisterPage({setUserLoginCookies}) {
     }
 
     return (
-        <div className="relative flex justify-center items-start min-h-screen bg-gradient-to-br from-blue-800 via-purple-700 to-pink-600 text-yellow-100 font-mono p-10 overflow-hidden">
+        <div className="relative flex justify-center items-start min-h-screen bg-gradient-to-br from-blue-800 via-purple-700 to-pink-600 text-yellow-100 font-mono p-[3vh] overflow-hidden">
 
             <img
                 src={car}
                 alt="car"
-                className={`absolute w-120 transition-all duration-2000 ease-in-out ${carLifted ? 'top-24' : 'top-[50%]'} z-10`}
-                style={{ left: '34.4%' }}
+                className={`absolute left-1/2 -translate-x-1/2 w-[55vw] max-w-[260px] transition-all duration-[2000ms] ease-in-out
+                ${carLifted ? "top-[47vh]" : "top-[65vh]"} z-10`}
             />
 
             <img
                 src={lift}
                 alt="lift"
-                className="absolute w-120 bottom-0 z-0"
-                style={{ left: '34.4%' }}
+                className="absolute left-1/2 -translate-x-1/2 w-[55vw] max-w-[260px] bottom-0 z-0"
             />
 
-            <div className={'absolute w-120 top-[30%] h-auto flex justify-center items-center'}
-            style={{ left: '34.4%'}}>
+            <div className="absolute left-1/2 -translate-x-1/2 flex justify-center z-20 items-center w-[55vw] max-w-[260px]"
+                 style={{ top: "30vh" }}>
             <form
-                className={`relative w-80 top-[30%] z-20 bg-[#000000aa] backdrop-blur-md border-4 border-yellow-300 p-5 rounded-md shadow-[0_0_20px_5px_rgba(255,255,0,0.8)] transition-opacity duration-4000 ${
+                className={`relative w-[100%] z-20 bg-[#000000aa] backdrop-blur-md border-4 border-yellow-300 p-[3vh] rounded-md shadow-[0_0_20px_5px_rgba(255,255,0,0.8)] transition-opacity duration-[1800ms] ${
                     carLifted ? 'opacity-100' : 'opacity-0 pointer-events-none'
                 }`}
             >
-                <h5 className="text-2xl font-bold underline mb-4 text-center drop-shadow-[2px_2px_0_rgba(0,0,0,0.6)]">
+                <h5 className="text-[3vh] font-bold underline mb-[2vh] text-center drop-shadow-[2px_2px_0_rgba(0,0,0,0.6)]">
                     Registration
                 </h5>
-                <div className="flex flex-col gap-3">
-                    <label className="text-sm tracking-wider">Username:</label>
+                <div className="flex flex-col gap-[1.5vh]">
+                    <label className="text-[1.6vh] tracking-wider">Username:</label>
                     <input
                         onChange={(event) => {
                             setNewUserData({...newUserData, username: event.target.value});
@@ -104,9 +103,9 @@ export default function RegisterPage({setUserLoginCookies}) {
                         type="text"
                         required
                         placeholder="Enter your username"
-                        className="bg-black text-lime-300 border border-lime-400 p-1"
+                        className="bg-black text-lime-300 border border-lime-400 p-[1vh]"
                     />
-                    <label className="text-sm tracking-wider">Email:</label>
+                    <label className="text-[1.6vh] tracking-wider">Email:</label>
                     <input
                         onChange={(event) => {
                             setNewUserData({...newUserData, email: event.target.value})
@@ -114,9 +113,9 @@ export default function RegisterPage({setUserLoginCookies}) {
                         type="email"
                         required
                         placeholder="Enter your email"
-                        className="bg-black text-lime-300 border border-lime-400 p-1"
+                        className="bg-black text-lime-300 border border-lime-400 p-[1vh]"
                     />
-                    <label className="text-sm tracking-wider">Password:</label>
+                    <label className="text-[1.6vh] tracking-wider">Password:</label>
                     <input
                         onChange={(event) => {
                             setNewUserData({...newUserData, password: event.target.value})
@@ -124,18 +123,18 @@ export default function RegisterPage({setUserLoginCookies}) {
                         type="password"
                         required
                         placeholder="********"
-                        className="bg-black text-lime-300 border border-lime-400 p-1"
+                        className="bg-black text-lime-300 border border-lime-400 p-[1vh]"
                     />
                 </div>
                 <button
                     onClick={handleSignup}
                     disabled={!submittable}
-                    className="w-full mt-4 bg-yellow-400 text-black font-extrabold py-2 rounded hover:bg-yellow-200 shadow-md border border-black"
+                    className="w-full mt-[3vh] bg-yellow-400 text-black font-extrabold py-[1.6vh] rounded hover:bg-yellow-200 shadow-md border border-black"
                 >
                     Register
                 </button>
-                <div className='mt-2'>
-                      <span className='text-sm tracking-wider'>
+                <div className='mt-[1.5vh]'>
+                      <span className='text-[1.6vh] tracking-wider'>
                         {' '}
                           Already have an account?{' '}
                       </span>
