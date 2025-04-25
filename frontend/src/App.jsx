@@ -8,6 +8,7 @@ import LoginPage from "./pages/loginPage/LoginPage.jsx";
 import {Toaster} from "react-hot-toast";
 import PostProblemPage from "./pages/postProblemPage/PostProblemPage.jsx";
 import Navbar from "./components/navbarComponent/NavbarComponent.jsx";
+import SeparateProblemPage from "./pages/separateProblemPage/SeparateProblemPage.jsx";
 
 export default function App() {
   const [cookies, setCookies] = useCookies(['user']);
@@ -27,6 +28,7 @@ export default function App() {
             <Route path="/register" element={<RegisterPage setUserLoginCookies={setUserLoginCookies}/>}/>
             <Route path="/login" element={<LoginPage setUserLoginCookies={setUserLoginCookies}/>}/>
             <Route path="/postproblem" element={<PostProblemPage />}/>
+            <Route path="/problem/:problemId" element={<SeparateProblemPage setUserLoginCookies={setUserLoginCookies}/> }/>
           </Routes>
           <Toaster/>
         </BrowserRouter>
