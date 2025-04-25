@@ -22,9 +22,14 @@ export default function MainPage({ searchProblem, normalProblem, setsearchProble
                     setAllProblems(() => true);
                     return;
                 }
-                setNormalProblem(() => [...normalProblem, ...data.problems]);
-                setsearchProblem(() => [...searchProblem, ...data.problems]);
                 setStartIndex(() => data.index);
+                if (startIndex <= 10){
+                    setNormalProblem(data.problems);
+                    setsearchProblem(data.problems);
+                } else {
+                    setNormalProblem(() => [...normalProblem, ...data.problems]);
+                    setsearchProblem(() => [...searchProblem, ...data.problems]);
+                }
             }
         } catch (error){
             console.log(error)
@@ -39,7 +44,7 @@ export default function MainPage({ searchProblem, normalProblem, setsearchProble
 
     return searchProblem ? (
         <>
-            <div>
+            <div className="relative flex justify-center items-start min-h-screen bg-gradient-to-br from-blue-800 via-purple-700 to-pink-600 text-yellow-100 font-mono p-[8vh] ">
                 <ProblemComponent problems={searchProblem}/>
             </div>
         </> ):
