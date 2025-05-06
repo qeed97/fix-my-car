@@ -12,11 +12,6 @@ export default function SeparateProblemComponent({problem, setProblem}) {
             <p className="text-xl tracking-wider">
                 {problem.description}
             </p>
-            <div className="flex flex-col gap-[1vh] pb-[1vh]">
-                <h2 className="text-xl tracking-wider">
-                    Fixes
-                </h2>
-            </div>
         </div>
     );
 }
