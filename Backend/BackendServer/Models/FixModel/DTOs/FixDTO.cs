@@ -9,6 +9,6 @@ public class FixDTO
     public string Content { get; set; }
     public string Username { get; set; }
     //public DateTime PostedAt { get; set; }
-    //public int Votes { get; set; }
+    public int Votes { get; set; }
     public bool Fixed  { get; set; }
 }

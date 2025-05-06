@@ -57,6 +57,12 @@ public class FixRepository(ApiDbContext dbContext) : IFixRepository
         return fix.ToDTO();
     }
 
+    public void VoteFix(Fix fix, int vote)
+    {
+        fix.Votes += vote;
+        dbContext.Update(fix);
+    }
+
     public IEnumerable<FixDTO> GetFixByContent(string subContent)
     {
         var bestResults = Process.ExtractSorted(subContent, dbContext.Fixes.Select(f => f.Content).ToArray())

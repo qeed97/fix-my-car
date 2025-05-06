@@ -14,7 +14,7 @@ public static class FixExtensions
             //PostedAt = fix.PostedAt,
             Username = fix.User.UserName,
             Fixed = fix.Fixed,
-            //Votes = fix.Votes
+            Votes = fix.Votes
         };
     }
 }

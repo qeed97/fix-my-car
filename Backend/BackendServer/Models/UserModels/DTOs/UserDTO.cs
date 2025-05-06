@@ -8,6 +8,8 @@ public class UserDTO
 {
     public string Username { get; set; }
     public int karma { get; set; } = 0;
+    public List<Guid> Upvotes { get; set; }
+    public List<Guid> Downvotes { get; set; }
     public List<ProblemDTO> Problems { get; set; } 
     public List<FixDTO> Fixes { get; set; } 
     public string SessionToken { get; set; }
