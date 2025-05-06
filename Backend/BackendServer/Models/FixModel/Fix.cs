@@ -10,7 +10,7 @@ public class Fix
     public Guid Id { get; set; }
     public string Content { get; set; }
     public Problem Problem { get; set; }
-    //public int Votes { get; set; }
+    public int Votes { get; set; }
     public User User { get; set; }
     public string UserId { get; set; }
     [Column(TypeName = "char(36)")]

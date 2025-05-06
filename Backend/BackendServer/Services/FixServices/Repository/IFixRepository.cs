@@ -19,7 +19,7 @@ public interface IFixRepository
 
     public Task<FixDTO> AcceptFix(Fix fix);
     
-    //public void VoteFix(Fix fix, int vote);
+    public void VoteFix(Fix fix, int vote);
     
     public IEnumerable<FixDTO> GetFixByContent(string subContent);
     

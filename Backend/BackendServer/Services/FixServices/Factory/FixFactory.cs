@@ -12,7 +12,7 @@ public class FixFactory : IFixFactory
         return new Fix
         {
             Id = Guid.NewGuid(), Content = newFix.Content, User = user,/*PostedAt = newFix.PostedAt*/
-            UserId = user.Id, Problem = problem, ProblemId = problem.Id, /*Votes = 0*/
+            UserId = user.Id, Problem = problem, ProblemId = problem.Id, Votes = 0
         };
     }
 

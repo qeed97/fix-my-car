@@ -18,13 +18,13 @@ public interface IUserRepository
     
     public Task UpdateKarma(User user, int karma);
     
-    //public Task Upvote();
+    public Task Upvote(User user, Guid fixGuid);
     
-    //public Task Downvote();
+    public Task Downvote(User user, Guid fixGuid);
     
-    //public Task RemoveUpvote();
+    public Task RemoveUpvote(User user, Guid fixGuid);
     
-    //public Task RemoveDownvote();
+    public Task RemoveDownvote(User user, Guid fixGuid);
 
     public ValueTask<User?> GetUserByUsername(string username);
     
