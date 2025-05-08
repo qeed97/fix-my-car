@@ -36,6 +36,9 @@
       - ConnectionStrings__MySql=Server=db;Database=${DB_NAME};User=${DB_USERNAME};Password=${DB_USER_PASSWORD};Port=${DB_PORT};
 
   frontend:
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
     build:
       context: ./frontend
       dockerfile: Dockerfile
@@ -43,9 +46,15 @@
       - my-network
     ports:
       - "5173:5173"
+    develop:
+      watch:
+        - action: sync
+          path: ./frontend
+          target: /app
+          ignore:
+            - node_modules
     environment:
       - VITE_API_URL=http://backend-server:8080
-
 
 networks:
   my-network:
