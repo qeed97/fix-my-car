@@ -101,4 +101,83 @@ public class FixController(
         var problem = await fixRepository.GetProblemByFixId(id) ?? throw new Exception("this problem could not be found");
         return Ok(problem.Id);
     }
+    
+    [HttpPatch("{id:guid}/upvote")]
+    [Authorize(Roles = "Admin, User")]
+    public async Task<ActionResult> UpVoteFix(Guid id)
+    {
+        var username = User.FindFirstValue(ClaimTypes.Name) ?? throw new Exception("This token is invalid");
+        var user = await userRepository.GetUserOnlyFixes(username) ??
+                   throw new Exception("This user could not be found");
+        var fix = await fixRepository.GetFixById(id) ??
+                  throw new Exception("This fix could not be found");
+        var fixUser = fix.User;
+        if (user.Upvotes.Contains(fix.Id))
+        {
+            var unVote = -1;
+            await userRepository.RemoveUpvote(user, fix.Id);
+            fixRepository.VoteFix(fix, unVote);
+            await userRepository.UpdateKarma(fixUser, unVote);
+
+            return Content("\"Unvoted fix\"", "application/json");
+        }
+
+        if (user.Downvotes.Contains(fix.Id))
+        {
+            var reVote = 2;
+            await userRepository.RemoveDownvote(user, fix.Id);
+            fixRepository.VoteFix(fix, reVote);
+            await userRepository.UpdateKarma(fixUser, reVote);
+            await userRepository.Upvote(user, fix.Id);
+
+            return Content("\"Upvoted fix\"", "application/json");
+        }
+
+        var vote = 1;
+        fixRepository.VoteFix(fix, vote);
+        await userRepository.UpdateKarma(fixUser, vote);
+        await userRepository.Upvote(user, fix.Id);
+
+        return Content("\"Upvoted fix\"", "application/json");
+    }
+
+    [HttpPatch("{id:guid}/downvote")]
+    [Authorize(Roles = "Admin, User")]
+    public async Task<ActionResult> DownVoteFix(Guid id)
+    {
+        var username = User.FindFirstValue(ClaimTypes.Name) ?? throw new Exception("This token is invalid");
+        var user = await userRepository.GetUserOnlyFixes(username) ??
+                   throw new Exception("This user could not be found");
+        var fix = await fixRepository.GetFixById(id) ??
+                     throw new Exception("This fix could not be found");
+
+        var fixUser = fix.User;
+
+        if (user.Downvotes.Contains(fix.Id))
+        {
+            var unVote = 1;
+            await userRepository.RemoveDownvote(user, fix.Id);
+            fixRepository.VoteFix(fix, unVote);
+            await userRepository.UpdateKarma(fixUser, unVote);
+
+            return Content("\"Unvoted fix\"", "application/json");
+        }
+
+        if (user.Upvotes.Contains(fix.Id))
+        {
+            var reVote = -2;
+            await userRepository.RemoveUpvote(user, fix.Id);
+            fixRepository.VoteFix(fix, reVote);
+            await userRepository.UpdateKarma(fixUser, reVote);
+            await userRepository.Downvote(user, fix.Id);
+            return Content("\"Downvoted fix\"", "application/json");
+        }
+
+        var vote = -1;
+        fixRepository.VoteFix(fix, vote);
+        await userRepository.UpdateKarma(fixUser, vote);
+        await userRepository.Downvote(user, fix.Id);
+
+        return Content("\"Downvote fix\"", "application/json");
+    }
 }

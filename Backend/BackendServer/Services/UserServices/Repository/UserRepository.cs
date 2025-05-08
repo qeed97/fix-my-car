@@ -84,4 +84,28 @@ public class UserRepository(UserManager<User> userManager, ApiDbContext context,
             .Include(u => u.Problems)
             .FirstOrDefaultAsync(u => u.UserName == username);
     }
+    
+    public async Task Upvote(User user, Guid fixGuid)
+    {
+        user.Upvotes.Add(fixGuid);
+        await userManager.UpdateAsync(user);
+    }
+
+    public async Task Downvote(User user, Guid fixGuid)
+    {
+        user.Downvotes.Add(fixGuid);
+        await userManager.UpdateAsync(user);
+    }
+
+    public async Task RemoveUpvote(User user, Guid fixGuid)
+    {
+        user.Upvotes.Remove(fixGuid);
+        await userManager.UpdateAsync(user);
+    }
+
+    public async Task RemoveDownvote(User user, Guid fixGuid)
+    {
+        user.Downvotes.Remove(fixGuid);
+        await userManager.UpdateAsync(user);
+    }
 }
