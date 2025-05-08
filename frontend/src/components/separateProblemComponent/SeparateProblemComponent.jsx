@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import {useCookies} from "react-cookie";
 
-export default function SeparateProblemComponent({problem, setProblem}) {
+export default function SeparateProblemComponent({problem, setProblem, user}) {
     const [cookies] = useCookies(['user']);
 
     return (

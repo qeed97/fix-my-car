@@ -13,7 +13,7 @@ export default function SeparateProblemPage({setUserLoginCookies}) {
     const [fixes, setFixes] = useState([]);
     const [reply, setReply] = useState({content: ""});
     const [submittable, setSubmittable] = useState(false);
-    //const [user, setUser] = useState(null);
+    const [user, setUser] = useState(null);
     const showErrorToast = (message) => toast.error(message);
     console.log(problemId);
     const fetchFixes = async (problemId, setFixes) => {
@@ -48,8 +48,27 @@ export default function SeparateProblemPage({setUserLoginCookies}) {
                 console.log(error);
             }
         }
-        //fetchUser();
+        const fetchUser = async () => {
+            try {
+                const res = await fetch('/api/Users/GetBySessionToken', {
+                    headers: {
+                        'Authorization': "Bearer " + cookies.user
+                    }
+                    }
+                )
+                const data = await res.json();
+                if (data.message){
+                    showErrorToast(data.message);
+                    return;
+                }
+                setUser(data);
+            } catch (error) {
+                console.log(error);
+                showErrorToast("something went wrong");
+            }
+        }
         //checkIfAdmin();
+        fetchUser();
         fetchFixes(problemId, setFixes);
         fetchProblem();
     },[]);
@@ -64,12 +83,12 @@ export default function SeparateProblemPage({setUserLoginCookies}) {
 
     console.log(problemData);
     return problemData && (
-        <div className="relative flex flex-col items-center justify-center gap-4 bg-gradient-to-br from-blue-800 via-purple-700 to-pink-600 text-yellow-100 font-mono p-[8vh]">
-            <SeparateProblemComponent problem={problemData} setProblem={setProblemData}/>
+        <div className="relative min-h-screen flex flex-col items-center justify-center gap-4 bg-gradient-to-br from-blue-800 via-purple-700 to-pink-600 text-yellow-100 font-mono p-[8vh]">
+            <SeparateProblemComponent problem={problemData} setProblem={setProblemData} user={user}/>
             <div className="flex flex-col w-[90vw] gap-[1vh] pb-[1vh]">
                 {fixes.map(fix => {
                     return (
-                        <FixComponent key={fix.id} fix={fix} problem={problemData} setFixes={setFixes} setProblemData={setProblemData}/>
+                        <FixComponent key={fix.id} cookies={cookies} user={user} setUser={setUser} fix={fix} problem={problemData} setFixes={setFixes} setProblemData={setProblemData}/>
                     )
                     }
                 )}
