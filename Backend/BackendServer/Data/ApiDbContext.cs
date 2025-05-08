@@ -22,7 +22,7 @@ public class ApiDbContext(DbContextOptions<ApiDbContext> options)
         modelBuilder.Entity<User>(entity =>
         {
             var guidListConverter = new ValueConverter<List<Guid>, string>(
-                v => string.Join(',', v),
+                v => string.Join(',', v.Select(g => g.ToString("D"))),
                 v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).Select(Guid.Parse).ToList()
             );
 
@@ -32,13 +32,15 @@ public class ApiDbContext(DbContextOptions<ApiDbContext> options)
                 c => c.ToList()
             );
 
-            entity.Property(u => u.Upvotes)
-                .HasConversion(guidListConverter)
-                .Metadata.SetValueComparer(guidListComparer);
+            var upvotesProp = entity.Property(u => u.Upvotes);
+            upvotesProp.HasConversion(guidListConverter);
+            upvotesProp.Metadata.SetValueComparer(guidListComparer);
+            upvotesProp.HasColumnType("LONGTEXT");
 
-            entity.Property(u => u.Downvotes)
-                .HasConversion(guidListConverter)
-                .Metadata.SetValueComparer(guidListComparer);
+            var downvotesProp = entity.Property(u => u.Downvotes);
+            downvotesProp.HasConversion(guidListConverter);
+            downvotesProp.Metadata.SetValueComparer(guidListComparer);
+            downvotesProp.HasColumnType("LONGTEXT");
         });
     }
 }
