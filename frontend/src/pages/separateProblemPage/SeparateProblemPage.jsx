@@ -64,9 +64,9 @@ export default function SeparateProblemPage({setUserLoginCookies}) {
 
     console.log(problemData);
     return problemData && (
-        <div className="relative flex flex-col justify-center items-start min-h-screen bg-gradient-to-br from-blue-800 via-purple-700 to-pink-600 text-yellow-100 font-mono p-[8vh]">
+        <div className="relative flex flex-col items-center justify-center gap-4 bg-gradient-to-br from-blue-800 via-purple-700 to-pink-600 text-yellow-100 font-mono p-[8vh]">
             <SeparateProblemComponent problem={problemData} setProblem={setProblemData}/>
-            <div className="flex flex-col gap-[1vh] pb-[1vh]">
+            <div className="flex flex-col w-[90vw] gap-[1vh] pb-[1vh]">
                 {fixes.map(fix => {
                     return (
                         <FixComponent key={fix.id} fix={fix} problem={problemData} setFixes={setFixes} setProblemData={setProblemData}/>
