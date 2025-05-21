@@ -28,6 +28,7 @@ public class ProblemRepository(ApiDbContext context) : IProblemRepository
             Title = newProblem.Title,
             Description = newProblem.Description,
             User = user,
+            PostedAt = newProblem.PostedAt,
             UserId = user.Id,
             Fixes = [],
             Id = Guid.NewGuid(),
@@ -48,6 +49,7 @@ public class ProblemRepository(ApiDbContext context) : IProblemRepository
             Title = problem.Title,
             Description = problem.Description,
             Username = problem.User.UserName,
+            PostedAt = problem.PostedAt,
         };
     }
 

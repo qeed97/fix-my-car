@@ -13,8 +13,7 @@ public class Problem
     public List<Fix> Fixes { get; set; } = new List<Fix>();
     public User User { get; set; }
     public string UserId { get; set; }
-    
-    //public DateTime PostedAt { get; set; }
+    public DateTime PostedAt { get; set; }
 
 
     public bool IsFixed()

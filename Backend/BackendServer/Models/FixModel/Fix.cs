@@ -15,7 +15,7 @@ public class Fix
     public string UserId { get; set; }
     [Column(TypeName = "char(36)")]
     public Guid ProblemId { get; set; }
-    //public DateTime PostedAt { get; set; }
+    public DateTime PostedAt { get; set; }
     public bool Fixed { get; set; } = false;
 
 

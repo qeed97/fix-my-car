@@ -11,7 +11,7 @@ public static class FixExtensions
         {
             Id = fix.Id,
             Content = fix.Content,
-            //PostedAt = fix.PostedAt,
+            PostedAt = fix.PostedAt,
             Username = fix.User.UserName,
             Fixed = fix.Fixed,
             Votes = fix.Votes

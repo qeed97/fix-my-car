@@ -3,5 +3,5 @@
 public class NewFix
 {
     public string Content { get; set; }
-    //public DateTime PostedAt { get; set; }
+    public DateTime PostedAt { get; set; }
 }

@@ -13,8 +13,8 @@ public static class ProblemExtensions
             Title = problem.Title,
             Description = problem.Description,
             IsFixed = problem.IsFixed(),
-            Username = problem.User.UserName
-            //PostedAt = problem.PostedAt,
+            Username = problem.User.UserName,
+            PostedAt = problem.PostedAt,
         };
     }
 
