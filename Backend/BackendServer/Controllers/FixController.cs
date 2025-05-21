@@ -38,6 +38,7 @@ public class FixController(
         var problem = await problemRepository.GetProblemById(problemId) ?? throw new Exception("this problem could not be found");
         
         var fix = fixFactory.CreateFix(newFix, problem, user);
+        await userRepository.UpdateKarma(user, 5);
         return Ok(await fixRepository.CreateFix(fix, user, problem));
     }
 
