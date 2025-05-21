@@ -32,7 +32,10 @@ export default function PostProblemPage() {
                 'Accept': 'application/json',
                 'Authorization': "Bearer " + cookies.user
             },
-            body: JSON.stringify(problem),
+            body: JSON.stringify({
+                ...problem,
+                postedAt: new Date(Date.now()).toISOString(),
+            }),
         });
         return await res.json();
     }

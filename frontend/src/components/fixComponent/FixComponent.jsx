@@ -135,9 +135,33 @@ export default function FixComponent({fix,problem,setFixes,setProblemData, user,
         }
     }
 
+    const formatTimeDifference = (postedAt) => {
+        const now = new Date();
+        const tempPostedAt = new Date(postedAt);
+        let offset = tempPostedAt.getTimezoneOffset() * -1;
+        const postedDate = new Date(tempPostedAt.getTime() + offset * 60000);
+        let differenceInSeconds = Math.floor(((now - postedDate) / 1000));
+        if (differenceInSeconds < 60) {
+            return `${differenceInSeconds} second${differenceInSeconds === 1 ? '' : 's'} ago`;
+        } else if (differenceInSeconds < 3600) {
+            const minutes = Math.floor(differenceInSeconds / 60);
+            return `${minutes} minute${minutes === 1 ? '' : 's'} ago`;
+        } else if (differenceInSeconds < 86400) {
+            const hours = Math.floor(differenceInSeconds / 3600);
+            return `${hours} hour${hours === 1 ? '' : 's'} ago`;
+        }
+        const days = Math.floor(differenceInSeconds / 86400);
+        return `${days} day${days === 1 ? '' : 's'} ago`;
+
+    };
+
     return (
         <div key={fix.id}
         className="relative bg-[#000000aa] backdrop-blur-md border-4 border-yellow-300 p-[2vh] rounded-md shadow-[0_0_20px_5px_rgba(255,255,0,0.8)]">
+            <div className="flex flex-row items-center justify-between">
+                <span>By: {fix.username}</span>
+                <span>{formatTimeDifference(fix.postedAt)}</span>
+            </div>
             <p className=" text-[2vh] bg-black text-lime-300 border border-lime-400 p-[1vh] break-words">{fix.content}</p>
             <div className="flex flex-row items-center gap-[1vh] mt-[1vh]">
                 <div

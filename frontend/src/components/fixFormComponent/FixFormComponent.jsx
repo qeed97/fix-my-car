@@ -14,7 +14,7 @@ export default function FixFormComponent({problemId, reply, submittable, cookies
                     'Authorization': "Bearer " + cookies.user,
                     'Content-type': 'application/json'
                 },
-                body: JSON.stringify({content: reply.content}),
+                body: JSON.stringify({content: reply.content, postedAt: new Date(Date.now()).toISOString()}),
             });
             return await res.json();
         } catch (error) {
